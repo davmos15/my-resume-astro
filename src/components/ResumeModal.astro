@@ -1,0 +1,62 @@
+---
+// Resume modal component
+---
+
+<div id="resumeModal" class="modal resume-modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <div id="modalResumeContent">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+    </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('resumeModal');
+    const modalContent = document.getElementById('modalResumeContent');
+    const closeBtn = modal?.querySelector('.modal-close');
+    const overlay = modal?.querySelector('.modal-overlay');
+    
+    // Function to open modal with resume item data
+    window.openResumeModal = (item) => {
+      if (!modal || !modalContent) return;
+      
+      let content = `<h2>${item.title}</h2>`;
+      
+      if (item.subtitle) content += `<h3>${item.subtitle}</h3>`;
+      if (item.company) content += `<p class="company"><strong>Company:</strong> ${item.company}</p>`;
+      if (item.institution) content += `<p class="institution"><strong>Institution:</strong> ${item.institution}</p>`;
+      if (item.date_range) content += `<p class="date-range"><strong>Period:</strong> ${item.date_range}</p>`;
+      
+      content += `<div class="description">${item.description}</div>`;
+      
+      if (item.technologies) content += `<p class="technologies"><strong>Technologies:</strong> ${item.technologies}</p>`;
+      if (item.degree) content += `<p class="degree"><strong>Degree:</strong> ${item.degree}</p>`;
+      if (item.certifications) content += `<p class="certifications"><strong>Certifications:</strong> ${item.certifications}</p>`;
+      if (item.skills) content += `<p class="skills"><strong>Skills:</strong> ${item.skills}</p>`;
+      
+      modalContent.innerHTML = content;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    };
+    
+    // Close modal
+    const closeModal = () => {
+      if (!modal) return;
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+    
+    closeBtn?.addEventListener('click', closeModal);
+    overlay?.addEventListener('click', closeModal);
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+      }
+    });
+  });
+</script>

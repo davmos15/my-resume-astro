@@ -1,0 +1,331 @@
+/* Enhanced Theme System - Ensures visibility across all themes */
+
+/* Apply theme colors to all elements */
+[data-theme] {
+    transition: all var(--theme-transition, 0.3s ease);
+}
+
+/* Ensure body and main content use theme colors */
+[data-theme] body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+[data-theme] main,
+[data-theme] section,
+[data-theme] .content {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Navigation styling for all themes */
+[data-theme] .topnav {
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+    border-bottom-color: var(--border-color);
+}
+
+[data-theme] .nav-link {
+    color: var(--nav-text) !important;
+}
+
+[data-theme] .nav-link:hover {
+    background-color: var(--bg-accent);
+    color: var(--text-primary) !important;
+}
+
+/* Dropdown menus */
+[data-theme] .dropdown-menu,
+[data-theme] .theme-dropdown-menu {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme] .dropdown-link,
+[data-theme] .theme-option {
+    color: var(--text-primary) !important;
+}
+
+[data-theme] .dropdown-link:hover,
+[data-theme] .theme-option:hover {
+    background-color: var(--bg-accent);
+    color: var(--text-primary) !important;
+}
+
+[data-theme] .theme-option.active {
+    background-color: var(--link-color);
+    color: var(--bg-primary) !important;
+}
+
+/* Accordion headers */
+[data-theme] .accordion-header {
+    background-color: var(--bg-accent);
+    color: var(--text-primary);
+}
+
+[data-theme] .accordion-header:hover {
+    background-color: var(--link-color);
+    color: var(--bg-primary);
+}
+
+[data-theme] .accordion-item.active .accordion-header {
+    background-color: var(--link-color);
+    color: var(--bg-primary);
+}
+
+/* Links throughout the site */
+[data-theme] a {
+    color: var(--link-color);
+}
+
+[data-theme] a:hover {
+    color: var(--link-hover);
+}
+
+/* Buttons */
+[data-theme] button,
+[data-theme] .btn {
+    background-color: var(--link-color);
+    color: var(--bg-primary);
+    border-color: var(--border-color);
+}
+
+[data-theme] button:hover,
+[data-theme] .btn:hover {
+    background-color: var(--link-hover);
+    color: var(--bg-primary);
+}
+
+/* Forms */
+[data-theme] input,
+[data-theme] textarea,
+[data-theme] select {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+[data-theme] input:focus,
+[data-theme] textarea:focus,
+[data-theme] select:focus {
+    border-color: var(--link-color);
+    outline-color: var(--link-color);
+}
+
+/* Tables */
+[data-theme] table {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+[data-theme] th {
+    background-color: var(--bg-accent);
+    color: var(--text-primary);
+}
+
+[data-theme] td {
+    border-color: var(--border-color);
+}
+
+[data-theme] tr:hover {
+    background-color: var(--bg-accent);
+}
+
+/* Cards and panels */
+[data-theme] .card,
+[data-theme] .panel {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Footer */
+[data-theme] footer {
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+}
+
+/* Headings */
+[data-theme] h1,
+[data-theme] h2,
+[data-theme] h3,
+[data-theme] h4,
+[data-theme] h5,
+[data-theme] h6 {
+    color: var(--text-primary);
+}
+
+/* Special sections */
+[data-theme] #welcome-section {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+[data-theme] #welcome-section a {
+    color: var(--link-color);
+}
+
+/* Fix for themes with gradient backgrounds */
+[data-theme="gradient"] body,
+[data-theme="gradient"] .topnav,
+[data-theme="gradient"] #welcome-section {
+    background: var(--bg-primary);
+}
+
+/* Ensure dropdown visibility in dark themes */
+[data-theme="dark"] .dropdown-menu,
+[data-theme="dark"] .theme-dropdown-menu,
+[data-theme="neon"] .dropdown-menu,
+[data-theme="neon"] .theme-dropdown-menu {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+}
+
+/* Fix AFL themes with poor contrast */
+[data-theme*="afl-"] .dropdown-menu,
+[data-theme*="afl-"] .theme-dropdown-menu {
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+}
+
+/* Ensure text is readable on colored backgrounds */
+[data-theme*="afl-carlton"] .nav-link,
+[data-theme*="afl-geelong"] .nav-link,
+[data-theme*="afl-fremantle"] .nav-link,
+[data-theme*="afl-adelaide"] .nav-link {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Fix specific AFL team contrast issues */
+[data-theme="afl-richmond"] {
+    --text-primary: #ffd200;
+    --nav-text: #ffd200;
+    --link-hover: #ffffff;
+}
+
+[data-theme="afl-richmond"] .dropdown-menu,
+[data-theme="afl-richmond"] .theme-dropdown-menu {
+    background-color: #1a1a1a;
+    color: #ffd200;
+}
+
+[data-theme="afl-stkilda"] .dropdown-menu,
+[data-theme="afl-stkilda"] .theme-dropdown-menu,
+[data-theme="afl-collingwood"] .dropdown-menu,
+[data-theme="afl-collingwood"] .theme-dropdown-menu {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+/* Ensure admin sections remain functional */
+[data-theme] .admin-panel {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+[data-theme] .admin-nav {
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+}
+
+/* Alert messages */
+[data-theme] .alert {
+    border-color: var(--border-color);
+}
+
+[data-theme] .alert-success {
+    background-color: rgba(40, 167, 69, 0.2);
+    color: var(--text-primary);
+}
+
+[data-theme] .alert-error {
+    background-color: rgba(220, 53, 69, 0.2);
+    color: var(--text-primary);
+}
+
+/* Ensure hover states are visible */
+[data-theme] *:hover {
+    transition: all 0.2s ease;
+}
+
+/* Fix welcome section for all themes */
+[data-theme] #welcome-section {
+    height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Special handling for problematic color combinations */
+[data-theme="afl-goldcoast"] main,
+[data-theme="afl-goldcoast"] section {
+    background-color: #cc0025;
+    color: #ffffff;
+}
+
+[data-theme="afl-goldcoast"] .dropdown-menu,
+[data-theme="afl-goldcoast"] .theme-dropdown-menu {
+    background-color: #cc0025;
+    color: #ffffff;
+}
+
+[data-theme="afl-goldcoast"] a {
+    color: #fed102;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Fix gradient theme text visibility */
+[data-theme="gradient"] * {
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+[data-theme="gradient"] .dropdown-menu,
+[data-theme="gradient"] .theme-dropdown-menu {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+/* Fix neon theme dropdown */
+[data-theme="neon"] .dropdown-menu,
+[data-theme="neon"] .theme-dropdown-menu {
+    background-color: #1a1a1a;
+    border: 1px solid #00ffff;
+}
+
+/* Ensure form elements are visible */
+[data-theme] input::placeholder,
+[data-theme] textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Code blocks */
+[data-theme] pre,
+[data-theme] code {
+    background-color: var(--bg-accent);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Scrollbar styling */
+[data-theme] ::-webkit-scrollbar {
+    width: 12px;
+}
+
+[data-theme] ::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+[data-theme] ::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 6px;
+}
+
+[data-theme] ::-webkit-scrollbar-thumb:hover {
+    background: var(--link-color);
+}

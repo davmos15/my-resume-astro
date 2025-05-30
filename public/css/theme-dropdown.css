@@ -1,0 +1,109 @@
+/* Theme Dropdown CSS - Updated 2025 */
+
+/* Theme dropdown container - avoiding the problematic class name */
+.nav-item:last-child {
+    position: relative;
+}
+
+/* Theme dropdown menu */
+.theme-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--bg-secondary, #ffffff);
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px var(--shadow-color, rgba(0,0,0,0.15));
+    min-width: 280px;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 9999;
+    
+    /* Hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+/* Show dropdown on hover */
+.nav-item:hover .theme-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Theme sections */
+.theme-section {
+    border-bottom: 1px solid var(--border-color, #e0e0e0);
+    padding: 12px 0;
+    margin: 0 12px;
+}
+
+.theme-section:last-child {
+    border-bottom: none;
+}
+
+.theme-section h4 {
+    margin: 0 0 8px 0;
+    padding: 0 4px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--text-secondary, #666666);
+    letter-spacing: 0.5px;
+}
+
+/* Theme options */
+.theme-option {
+    display: block;
+    padding: 8px 12px;
+    color: var(--text-primary, #333333);
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 4px;
+    margin: 2px 0;
+    transition: all 0.2s ease;
+}
+
+.theme-option:hover {
+    background-color: var(--link-color, #0066cc);
+    color: var(--bg-primary, #ffffff);
+    transform: translateX(3px);
+}
+
+.theme-option.active {
+    background-color: var(--link-color, #0066cc);
+    color: var(--bg-primary, #ffffff);
+    font-weight: bold;
+}
+
+
+/* AFL teams grid */
+.afl-teams {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .theme-dropdown-menu {
+        right: 0;
+        left: auto;
+        min-width: 260px;
+        max-width: calc(100vw - 20px);
+        margin-right: 10px;
+    }
+    
+    .afl-teams {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-dropdown-menu {
+        max-width: calc(100vw - 16px);
+        margin-right: 8px;
+    }
+}

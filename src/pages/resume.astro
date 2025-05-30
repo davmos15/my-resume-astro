@@ -1,0 +1,302 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ResumeCard from '../components/ResumeCard.astro';
+import ResumeModal from '../components/ResumeModal.astro';
+import db from '../lib/db.js';
+
+// Initialize variables
+let groupedSections = {};
+let error = null;
+let stats = { years: 0, companies: 0, roles: 0 };
+
+try {
+    // Fetch resume items from database grouped by type
+    const sections = db.prepare(`
+        SELECT * FROM resume_sections 
+        WHERE is_active = 1 
+        ORDER BY section_type, display_order
+    `).all();
+
+    // Group sections by type
+    groupedSections = sections.reduce((acc, section) => {
+        if (!acc[section.section_type]) {
+            acc[section.section_type] = [];
+        }
+        acc[section.section_type].push({
+            id: section.id,
+            type: section.section_type,
+            title: section.title,
+            subtitle: section.subtitle,
+            date_range: section.date_range,
+            description: section.description,
+            details: section.details
+        });
+        return acc;
+    }, {});
+
+    // Calculate stats for summary section
+    let companies = new Set();
+    let oldestDate = new Date();
+    let yearsExp = 0;
+
+    if (groupedSections.experience && groupedSections.experience.length > 0) {
+        groupedSections.experience.forEach(job => {
+            if (job.subtitle) {
+                const company = job.subtitle.split(' - ')[0];
+                companies.add(company);
+            }
+            if (job.date_range) {
+                const dateMatch = job.date_range.match(/(\d{4})/);
+                if (dateMatch) {
+                    const year = parseInt(dateMatch[1]);
+                    const jobDate = new Date(year, 0, 1);
+                    if (jobDate < oldestDate) oldestDate = jobDate;
+                }
+            }
+        });
+        yearsExp = new Date().getFullYear() - oldestDate.getFullYear();
+    }
+
+    stats = {
+        years: yearsExp > 0 ? yearsExp : 1,
+        companies: companies.size,
+        roles: groupedSections.experience ? groupedSections.experience.length : 0
+    };
+} catch (err) {
+    console.error('Error fetching resume sections:', err);
+    error = err.message;
+}
+---
+
+<BaseLayout title="Resume - Nadav Moskow">
+    <div id="resume-dashboard">
+        {error ? (
+            <div class="error-message">
+                <p>Error loading resume data: {error}</p>
+            </div>
+        ) : (
+            <>
+        <!-- Professional Summary Section -->
+        <div class="summary-stats-section">
+            <div class="summary-stats" 
+                 data-years={stats.years}
+                 data-companies={stats.companies}
+                 data-roles={stats.roles}>
+                <div class="stat-item">
+                    <div class="stat-number" id="years-exp">0</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="companies-count">0</div>
+                    <div class="stat-label">Companies</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="roles-count">0</div>
+                    <div class="stat-label">Roles</div>
+                </div>
+            </div>
+            
+            <!-- Download Button -->
+            <a href="/images/Nadav Moskow - Resume.pdf" target="_blank" download>
+                <button class="download-btn">
+                    <span>📄</span>
+                    Download PDF Resume
+                </button>
+            </a>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Professional Experience Card -->
+            <div class="dashboard-card" data-card="experience" id="Experience">
+                <div class="card-header clickable-header">
+                    <div class="header-content">
+                        <span class="card-icon">💼</span>
+                        <h2 class="card-title">Experience</h2>
+                    </div>
+                    <button class="collapse-toggle" aria-label="Toggle section">+</button>
+                </div>
+                
+                <div class="card-divider"></div>
+                
+                <div class="card-content">
+                    <!-- Job List -->
+                    <div class="experience-list">
+                        {groupedSections.experience && groupedSections.experience.length > 0 && (
+                            groupedSections.experience.map((job, index) => (
+                                <div class="job-item collapsible-job">
+                                    <div class="job-header" data-job={index}>
+                                        <div class="job-header-content">
+                                            <h3 class="job-title">{job.title}</h3>
+                                            <div class="job-meta-centered">
+                                                {job.subtitle && (
+                                                    <span class="job-company">{job.subtitle}</span>
+                                                )}
+                                                {job.date_range && (
+                                                    <span class="job-dates">{job.date_range}</span>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <button class="job-toggle" aria-label="Toggle job details">+</button>
+                                    </div>
+                                    <div class="job-content" id={`job-${index}`}>
+                                        <div class="job-description" set:html={job.description} />
+                                    </div>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </div>
+                
+                <div class="card-hover-overlay">
+                    <span class="view-details-text">View Details →</span>
+                </div>
+            </div>
+
+            <!-- Skills & Technologies Card -->
+            <div class="dashboard-card" data-card="skills" id="Skills">
+                <div class="card-header clickable-header">
+                    <div class="header-content">
+                        <span class="card-icon">🛠️</span>
+                        <h2 class="card-title">Skills & Tools</h2>
+                    </div>
+                    <button class="collapse-toggle" aria-label="Toggle section">+</button>
+                </div>
+                
+                <div class="card-divider"></div>
+                
+                <div class="card-content">
+                    {groupedSections.skills && groupedSections.skills.length > 0 && (
+                        <div class="skills-sections">
+                            {groupedSections.skills.map((skill, index) => (
+                                <div class="skill-section">
+                                    <div class="skill-header clickable-skill-header" data-skill={index}>
+                                        <h3 class="skill-category">{skill.title}</h3>
+                                        <button class="skill-toggle" data-skill={index} aria-label="Toggle skill section">+</button>
+                                    </div>
+                                    <div class="skill-content" id={`skill-${index}`} set:html={skill.description} />
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+                
+                <div class="card-hover-overlay">
+                    <span class="view-details-text">View Details →</span>
+                </div>
+            </div>
+
+            <!-- Achievements & Certifications Card -->
+            <div class="dashboard-card" data-card="achievements" id="Courses">
+                <div class="card-header clickable-header">
+                    <div class="header-content">
+                        <span class="card-icon">🏆</span>
+                        <h2 class="card-title">Courses & Achievements</h2>
+                    </div>
+                    <button class="collapse-toggle" aria-label="Toggle section">+</button>
+                </div>
+                
+                <div class="card-divider"></div>
+                
+                <div class="card-content">
+                    {groupedSections.courses && groupedSections.courses.length > 0 && (
+                        <div class="achievements-list">
+                            {groupedSections.courses.map(course => (
+                                <div class="achievement-item">
+                                    <div class="achievement-icon">🎯</div>
+                                    <div class="achievement-content">
+                                        <h3 class="achievement-title">{course.title}</h3>
+                                        {course.subtitle && (
+                                            <p class="achievement-subtitle">{course.subtitle}</p>
+                                        )}
+                                        <div class="achievement-description" set:html={course.description} />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+                
+                <div class="card-hover-overlay">
+                    <span class="view-details-text">View Details →</span>
+                </div>
+            </div>
+
+            <!-- Education Card -->
+            <div class="dashboard-card" data-card="education" id="Education">
+                <div class="card-header clickable-header">
+                    <div class="header-content">
+                        <span class="card-icon">🎓</span>
+                        <h2 class="card-title">Education</h2>
+                    </div>
+                    <button class="collapse-toggle" aria-label="Toggle section">+</button>
+                </div>
+                
+                <div class="card-divider"></div>
+                
+                <div class="card-content">
+                    {groupedSections.education && groupedSections.education.length > 0 && (
+                        <div class="education-list">
+                            {groupedSections.education.map(edu => (
+                                <div class="education-item">
+                                    <h3 class="education-degree">{edu.title}</h3>
+                                    <p class="education-school">{edu.subtitle}</p>
+                                    <p class="education-dates">{edu.date_range}</p>
+                                    <div class="education-description" set:html={edu.description} />
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+                
+                <div class="card-hover-overlay">
+                    <span class="view-details-text">View Details →</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resume Section Modal -->
+        <div id="resume-modal" class="resume-modal">
+            <div class="resume-modal-content">
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+                <div class="modal-header">
+                    <span class="modal-icon"></span>
+                    <h2 class="modal-title"></h2>
+                </div>
+                <div class="modal-body">
+                    <!-- Content will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+        </>
+        )}
+    </div>
+
+    <script src="/js/resume-modal.js?v=1" is:inline></script>
+    <script>
+    // Ensure dashboard is re-initialized after modal loads
+    function initResumeCards() {
+        // Small delay to ensure modal script executes
+        setTimeout(function() {
+            if (typeof initDashboard === 'function') {
+                initDashboard();
+            }
+        }, 100);
+    }
+    
+    // Initialize on page load and navigation
+    document.addEventListener('DOMContentLoaded', initResumeCards);
+    document.addEventListener('astro:page-load', initResumeCards);
+    </script>
+    
+    <style>
+        .error-message {
+            text-align: center;
+            color: var(--color-error, #dc3545);
+            padding: 2rem;
+            background-color: var(--color-error-bg, #f8d7da);
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+    </style>
+</BaseLayout>

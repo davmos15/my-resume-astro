@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Default content values - in a real app, these would come from a CMS or database
+const content = {
+    hero_title: "Hi, I'm Nadav!",
+    hero_subtitle: "I'm an Application Administrator currently working at Foxit Software."
+};
+---
+
+<BaseLayout title="Nadav Moskow - Home">
+    <div id="welcome-section" class="intro">
+        <div id="homepage-text">
+            <h1>{content.hero_title}</h1>
+            <p>{content.hero_subtitle}</p>
+            <p>You can read <a href="/resume">my resume</a> or find out more about me by visiting the <a href="/about">about me page</a>.</p>
+            <p>This website is intentionally a work in progress, I created it to work on some of my skills, there will be more to come in time.</p>
+            <p>If you'd like to get in touch, don't hesitate to <a href="/contact">contact me</a>.</p>
+        </div>
+    </div>
+</BaseLayout>

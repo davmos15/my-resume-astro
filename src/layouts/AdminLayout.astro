@@ -1,0 +1,133 @@
+---
+export interface Props {
+  title: string;
+  activePage?: string;
+}
+
+const { title, activePage = '' } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <link rel="stylesheet" href="/css/themes.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/rich-editor.css">
+</head>
+<body>
+    <nav class="admin-nav">
+        <div class="nav-brand">
+            <h1>Admin Panel</h1>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="/admin/dashboard" class={currentPath === '/admin/dashboard' ? 'active' : ''}>Dashboard</a></li>
+            <li><a href="/admin/pages" class={currentPath.startsWith('/admin/pages') ? 'active' : ''}>Pages</a></li>
+            <li><a href="/admin/projects" class={currentPath.startsWith('/admin/projects') ? 'active' : ''}>Projects</a></li>
+            <li><a href="/admin/resume" class={currentPath.startsWith('/admin/resume') ? 'active' : ''}>Resume</a></li>
+            <li><a href="/admin/files" class={currentPath === '/admin/files' ? 'active' : ''}>Files</a></li>
+            <li><a href="/" target="_blank">View Site</a></li>
+            <li>
+                <form action="/api/auth/logout" method="POST" style="display: inline;">
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    
+    <main class="admin-main">
+        <slot />
+    </main>
+    
+    <style>
+        /* Admin navigation active state */
+        .admin-nav .nav-menu a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* Admin layout structure */
+        .admin-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            background-color: #2c3e50;
+            color: white;
+            height: 60px;
+        }
+
+        .nav-brand h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .admin-main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+
+    <script>
+        // Handle logout form
+        document.querySelector('form[action="/api/auth/logout"]')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            try {
+                const response = await fetch('/api/auth/logout', {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                
+                if (response.ok) {
+                    window.location.href = '/admin/login';
+                }
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+---
+export interface Props {
+  currentYear: number;
+}
+
+const { currentYear } = Astro.props;
+---
+
+<footer>
+    <div class="footer-content">
+        <p>&copy; {currentYear} Nadav Moskow. All rights reserved.</p>
+    </div>
+</footer>

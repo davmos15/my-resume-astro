@@ -1,0 +1,938 @@
+/* Resume Dashboard Styles - Consistent with Site Design */
+
+#resume-dashboard {
+    padding: 50px 20px 40px;
+    min-height: calc(100vh - 120px);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Header Section */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.dashboard-name {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+    font-weight: bold;
+}
+
+.dashboard-subtitle {
+    font-size: 1.3em;
+    color: var(--text-primary);
+    opacity: 0.8;
+    margin-bottom: 25px;
+}
+
+/* Summary Stats Section */
+.summary-stats-section {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.summary-stats-section .stats-title {
+    font-size: 2em;
+    margin-bottom: 25px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.summary-stats-section .download-btn {
+    margin-top: 30px;
+}
+
+/* Download Button - Matching Site Design */
+.download-btn {
+    background-color: var(--nav-bg, #05386B);
+    color: var(--nav-text, #ffffff);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.download-btn:hover {
+    background-color: var(--nav-hover, #052a4e);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.download-btn span {
+    font-size: 1.2em;
+}
+
+/* Summary Stats Section */
+.summary-stats-section {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.summary-stats-section .download-btn {
+    margin-top: 30px;
+}
+
+.stats-title {
+    font-size: 1.8em;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.summary-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.summary-stats .stat-item {
+    background: var(--bg-secondary, #f5f5f5);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.summary-stats .stat-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.summary-stats .stat-number {
+    font-size: 2.8em;
+    font-weight: bold;
+    color: var(--nav-bg, #05386B);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.summary-stats .stat-label {
+    font-size: 0.9em;
+    color: var(--text-primary);
+    opacity: 0.7;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+/* Dashboard Grid - 3 columns on desktop */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Full width expansion */
+.dashboard-card.full-width {
+    grid-column: 1 / -1;
+    max-width: none;
+}
+
+/* Dashboard Cards - Enhanced like Project Cards */
+.dashboard-card {
+    background: var(--bg-primary, #ffffff);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+}
+
+.dashboard-card.fade-in {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Hover Overlay */
+.card-hover-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.9) 0%, rgba(41, 128, 185, 0.9) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    pointer-events: none;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.dashboard-card:hover .card-hover-overlay {
+    opacity: 1;
+}
+
+.view-details-text {
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+}
+
+.dashboard-card:hover .view-details-text {
+    transform: translateY(0);
+}
+
+/* Card Header - Simplified and smaller */
+.card-header {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    height: 180px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clickable-header {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+.card-icon {
+    font-size: 3em;
+    display: inline-block;
+    animation: bounce 2s infinite;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.card-title {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Card Divider - Hidden by default */
+.card-divider {
+    display: none;
+}
+
+/* Collapse Toggle Button - Hidden for main cards */
+.dashboard-card > .card-header .collapse-toggle {
+    display: none !important;
+}
+    transform: rotate(180deg);
+}
+
+/* Card Content - Hidden by default (cards show only emoji and title) */
+.dashboard-card .card-content {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Also hide the divider */
+.dashboard-card .card-divider {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+}
+
+/* Ensure cards only show header */
+.dashboard-card {
+    height: auto !important;
+}
+
+.dashboard-card > *:not(.card-header):not(.card-hover-overlay) {
+    display: none !important;
+}
+
+/* Job Items - Collapsible */
+.experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.job-item {
+    background: var(--bg-secondary, #f5f5f5);
+    border-radius: 8px;
+    border-left: 4px solid var(--nav-bg, #05386B);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.job-header {
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.job-header:hover {
+    background-color: var(--bg-primary, #ffffff);
+}
+
+.job-header-content {
+    flex: 1;
+}
+
+.job-title {
+    font-size: 1.2em;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.job-meta-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9em;
+    color: var(--text-primary);
+    opacity: 0.7;
+    text-align: center;
+}
+
+.job-company {
+    font-weight: 600;
+}
+
+.job-dates {
+    font-style: italic;
+}
+
+.job-toggle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--nav-bg, #05386B);
+    color: var(--nav-text, #ffffff);
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.job-toggle:hover {
+    background: var(--nav-hover, #052a4e);
+    transform: rotate(180deg);
+}
+
+.job-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.job-content.expanded {
+    max-height: 1000px;
+    padding: 0 20px 20px;
+}
+
+.job-description {
+    color: var(--text-primary);
+    line-height: 1.6;
+    text-align: left;
+}
+
+.job-description ul,
+.job-description ol {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+/* Skills Section */
+.skills-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.skill-section {
+    background: var(--bg-secondary, #f5f5f5);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.skill-header {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.clickable-skill-header {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.clickable-skill-header:hover {
+    background-color: var(--bg-primary, #ffffff);
+}
+
+.skill-category {
+    font-size: 1.1em;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.skill-toggle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--nav-bg, #05386B);
+    color: var(--nav-text, #ffffff);
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.skill-toggle:hover {
+    background: var(--nav-hover, #052a4e);
+    transform: rotate(180deg);
+}
+
+.skill-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.skill-content.expanded {
+    max-height: 800px;
+    padding: 0 20px 20px;
+}
+
+.skill-content {
+    text-align: left;
+}
+
+.skill-content ul,
+.skill-content ol {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.skill-content li {
+    margin-bottom: 5px;
+}
+
+.skill-content p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+/* Achievements */
+.achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.achievement-item {
+    display: flex;
+    gap: 15px;
+    background: var(--bg-secondary, #f5f5f5);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.achievement-icon {
+    font-size: 1.5em;
+    flex-shrink: 0;
+}
+
+.achievement-content {
+    flex: 1;
+}
+
+.achievement-title {
+    font-size: 1.1em;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.achievement-subtitle {
+    font-size: 0.9em;
+    color: var(--text-primary);
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.achievement-description {
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Education */
+.education-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.education-item {
+    background: var(--bg-secondary, #f5f5f5);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.education-degree {
+    font-size: 1.2em;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.education-school {
+    font-size: 1em;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.education-dates {
+    font-size: 0.9em;
+    color: var(--text-primary);
+    opacity: 0.7;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.education-description {
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    #resume-dashboard {
+        padding: 60px 15px 30px;
+    }
+
+    .dashboard-name {
+        font-size: 2.2em;
+    }
+
+    .dashboard-subtitle {
+        font-size: 1.1em;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .summary-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .summary-stats .stat-number {
+        font-size: 2.2em;
+    }
+
+    .summary-stats .stat-label {
+        font-size: 0.8em;
+    }
+
+    .card-header {
+        padding: 15px;
+    }
+
+    .card-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5em;
+    }
+
+    .card-title {
+        font-size: 1.2em;
+    }
+
+    .job-meta-centered {
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .job-header {
+        padding: 15px;
+    }
+
+    .job-toggle {
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-name {
+        font-size: 1.8em;
+    }
+
+    .dashboard-subtitle {
+        font-size: 1em;
+    }
+
+    .download-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .summary-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        max-width: 300px;
+    }
+
+    .summary-stats .stat-item {
+        padding: 20px;
+    }
+
+    .summary-stats .stat-number {
+        font-size: 2.5em;
+    }
+}
+
+/* Theme Compatibility */
+[data-theme="dark"] .dashboard-card,
+[data-theme="hacker"] .dashboard-card,
+[data-theme="midnight"] .dashboard-card {
+    background: var(--card-bg, var(--bg-primary));
+    border: 1px solid var(--border-color, transparent);
+}
+
+[data-theme="glass"] .dashboard-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+}
+
+[data-theme="gradient"] .dashboard-card {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+/* Ensure all text remains visible in all themes */
+[data-theme] .job-description,
+[data-theme] .achievement-description,
+[data-theme] .education-description,
+[data-theme] .skill-content {
+    color: var(--text-primary);
+}
+
+[data-theme] .job-description ul li,
+[data-theme] .job-description ol li,
+[data-theme] .achievement-description ul li,
+[data-theme] .achievement-description ol li,
+[data-theme] .skill-content ul li,
+[data-theme] .skill-content ol li {
+    color: var(--text-primary);
+}
+/* Resume Modal Styles - Instagram-style like Projects */
+.resume-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(0px);
+}
+
+.resume-modal.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: all !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: blur(10px);
+}
+
+.resume-modal-content {
+    background: var(--bg-primary);
+    width: 90%;
+    max-width: 900px;
+    max-height: 80vh;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    transform: scale(0.7) translateY(50px);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+.resume-modal.show .resume-modal-content {
+    transform: scale(1) translateY(0);
+}
+
+/* Modal Close Button */
+.resume-modal .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    font-size: 24px;
+    line-height: 1;
+}
+
+.resume-modal .modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1) rotate(90deg);
+}
+
+/* Modal Header */
+.resume-modal .modal-header {
+    padding: 40px;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.resume-modal .modal-icon {
+    font-size: 4em;
+    width: 100px;
+    height: 100px;
+    background: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.resume-modal .modal-title {
+    font-size: 2.5em;
+    color: var(--text-primary);
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Modal Body */
+.resume-modal .modal-body {
+    padding: 40px;
+    overflow-y: auto;
+    max-height: calc(80vh - 200px);
+}
+
+/* Modal Content Styles */
+.resume-modal .experience-list,
+.resume-modal .skills-container,
+.resume-modal .achievements-grid,
+.resume-modal .education-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Theme-specific hover overlays */
+[data-theme="dark"] .card-hover-overlay {
+    background: linear-gradient(135deg, rgba(45, 136, 255, 0.9) 0%, rgba(36, 107, 206, 0.9) 100%);
+}
+
+[data-theme="hacker"] .card-hover-overlay {
+    background: linear-gradient(135deg, rgba(0, 255, 0, 0.9) 0%, rgba(0, 200, 0, 0.9) 100%);
+}
+
+[data-theme="glass"] .card-hover-overlay {
+    background: linear-gradient(135deg, rgba(125, 185, 232, 0.9) 0%, rgba(99, 146, 184, 0.9) 100%);
+}
+
+[data-theme="midnight"] .card-hover-overlay {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.9) 0%, rgba(111, 74, 197, 0.9) 100%);
+}
+
+/* Theme-specific stat number colors for optimal contrast */
+[data-theme="default"] .summary-stats .stat-number,
+:root .summary-stats .stat-number {
+    color: #05386B;
+}
+
+[data-theme="dark"] .summary-stats .stat-number {
+    color: #4FC3F7;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="hacker"] .summary-stats .stat-number {
+    color: #00FF41;
+    text-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+}
+
+[data-theme="glass"] .summary-stats .stat-number {
+    color: #1565C0;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="midnight"] .summary-stats .stat-number {
+    color: #A78BFA;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* AFL Theme colors - High contrast versions */
+[data-theme="afl-adelaide"] .summary-stats .stat-number { color: #0056B3; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+[data-theme="afl-brisbane"] .summary-stats .stat-number { color: #D32F60; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+[data-theme="afl-carlton"] .summary-stats .stat-number { color: #1976D2; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+[data-theme="afl-collingwood"] .summary-stats .stat-number { color: #212121; text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7); }
+[data-theme="afl-essendon"] .summary-stats .stat-number { color: #E53935; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+[data-theme="afl-fremantle"] .summary-stats .stat-number { color: #4A148C; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3); }
+[data-theme="afl-geelong"] .summary-stats .stat-number { color: #1976D2; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3); }
+[data-theme="afl-goldcoast"] .summary-stats .stat-number { color: #FF8F00; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
+[data-theme="afl-gws"] .summary-stats .stat-number { color: #FF8F00; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
+[data-theme="afl-hawthorn"] .summary-stats .stat-number { color: #8D6E63; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3); }
+[data-theme="afl-melbourne"] .summary-stats .stat-number { color: #E53935; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+[data-theme="afl-northmelbourne"] .summary-stats .stat-number { color: #1976D2; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3); }
+[data-theme="afl-portadelaide"] .summary-stats .stat-number { color: #00ACC1; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+[data-theme="afl-richmond"] .summary-stats .stat-number { color: #FFD600; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); }
+[data-theme="afl-stkilda"] .summary-stats .stat-number { color: #E53935; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+[data-theme="afl-sydney"] .summary-stats .stat-number { color: #E53935; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3); }
+[data-theme="afl-westcoast"] .summary-stats .stat-number { color: #1976D2; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3); }
+[data-theme="afl-westernbulldogs"] .summary-stats .stat-number { color: #1976D2; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3); }
+
+/* Modal text contrast fixes for all themes */
+[data-theme="dark"] .resume-modal-content,
+[data-theme="hacker"] .resume-modal-content,
+[data-theme="midnight"] .resume-modal-content {
+    color: #FFFFFF;
+}
+
+[data-theme="dark"] .resume-modal .modal-title,
+[data-theme="hacker"] .resume-modal .modal-title,
+[data-theme="midnight"] .resume-modal .modal-title {
+    color: #FFFFFF !important;
+}
+
+[data-theme="glass"] .resume-modal-content {
+    color: #1A1A1A;
+}
+
+[data-theme="glass"] .resume-modal .modal-title {
+    color: #1A1A1A !important;
+}
+
+/* Ensure all modal text elements have proper contrast */
+[data-theme="dark"] .resume-modal .modal-body *,
+[data-theme="hacker"] .resume-modal .modal-body *,
+[data-theme="midnight"] .resume-modal .modal-body * {
+    color: inherit;
+}
+
+[data-theme="glass"] .resume-modal .modal-body * {
+    color: #1A1A1A;
+}
+
+/* Job and skill content in modals */
+[data-theme="dark"] .resume-modal .job-title,
+[data-theme="dark"] .resume-modal .job-company,
+[data-theme="dark"] .resume-modal .job-dates,
+[data-theme="dark"] .resume-modal .skill-name,
+[data-theme="hacker"] .resume-modal .job-title,
+[data-theme="hacker"] .resume-modal .job-company,
+[data-theme="hacker"] .resume-modal .job-dates,
+[data-theme="hacker"] .resume-modal .skill-name,
+[data-theme="midnight"] .resume-modal .job-title,
+[data-theme="midnight"] .resume-modal .job-company,
+[data-theme="midnight"] .resume-modal .job-dates,
+[data-theme="midnight"] .resume-modal .skill-name {
+    color: #FFFFFF !important;
+}
+
+[data-theme="glass"] .resume-modal .job-title,
+[data-theme="glass"] .resume-modal .job-company,
+[data-theme="glass"] .resume-modal .job-dates,
+[data-theme="glass"] .resume-modal .skill-name {
+    color: #1A1A1A !important;
+}

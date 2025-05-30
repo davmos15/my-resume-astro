@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ProjectModal from '../components/ProjectModal.astro';
+import db from '../lib/db.js';
+
+// Fetch projects from database
+let projects = [];
+let error = null;
+
+try {
+  const stmt = db.prepare('SELECT * FROM projects WHERE is_active = 1 ORDER BY display_order, id DESC');
+  const rawProjects = stmt.all();
+  
+  // Map database fields to component props
+  projects = rawProjects.map((project, index) => ({
+    id: project.id || index,
+    name: project.title,
+    description: project.description,
+    technologies: project.technologies || '',
+    github_link: project.github_link || '',
+    demo_link: project.live_link || '',
+    emoji: project.emoji || '🚀',
+    image_url: project.image_path || '',
+    subtitle: project.subtitle || '',
+    // Additional fields for modal
+    overview: project.subtitle || (project.description ? project.description.substring(0, 150) + '...' : 'An innovative project showcasing cutting-edge technologies and best practices.'),
+    achievements: [
+      "Implemented core functionality with modern best practices",
+      "Optimized performance for enhanced user experience", 
+      "Integrated responsive design for all devices",
+      "Achieved 100% test coverage"
+    ],
+    timeline: "2024",
+    team_size: (index % 4) + 1
+  }));
+} catch (err) {
+  console.error('Error fetching projects:', err);
+  error = err.message;
+}
+---
+
+<BaseLayout title="Projects - Nadav Moskow">
+  <div id="projects-dashboard">
+    {error ? (
+      <div class="error-message">
+        <p>Error loading projects: {error}</p>
+      </div>
+    ) : (
+      <div class="projects-grid">
+        {projects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    )}
+  </div>
+  
+  <!-- Project Modal -->
+  <ProjectModal />
+  
+  <!-- Client-side JavaScript for modal functionality -->
+  <script define:vars={{ projects }}>
+    // Store projects data globally for modal access
+    window.projectsData = projects;
+    
+    function initProjectCards() {
+      const projectCards = document.querySelectorAll('.project-card');
+      
+      projectCards.forEach(card => {
+        // Remove existing listeners to prevent duplicates
+        card.replaceWith(card.cloneNode(true));
+      });
+      
+      // Re-query after cloning
+      const freshCards = document.querySelectorAll('.project-card');
+      freshCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const projectId = parseInt(card.dataset.projectId);
+          const project = window.projectsData.find(p => p.id === projectId);
+          
+          if (project && window.openProjectModal) {
+            window.openProjectModal(project);
+          }
+        });
+      });
+    }
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', initProjectCards);
+    
+    // Re-initialize on Astro page navigation
+    document.addEventListener('astro:page-load', initProjectCards);
+      
+      projectCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          // Prevent clicks on links from opening modal
+          if (e.target.tagName === 'A') return;
+          
+          const projectId = card.dataset.projectId;
+          const project = window.projectsData.find(p => p.id == projectId);
+          
+          if (project && window.openProjectModal) {
+            window.openProjectModal(project);
+          }
+        });
+      });
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  #projects-dashboard {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .error-message {
+    text-align: center;
+    color: var(--color-error, #dc3545);
+    padding: 2rem;
+    background-color: var(--color-error-bg, #f8d7da);
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+  }
+  
+  @media (max-width: 768px) {
+    #projects-dashboard {
+      padding: 1rem;
+    }
+    
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

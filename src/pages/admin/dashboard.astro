@@ -1,0 +1,162 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+
+// Check authentication
+const session = Astro.cookies.get('session');
+if (!session) {
+  return Astro.redirect('/admin/login');
+}
+
+// Fetch stats from API
+let stats = {
+  projects: { count: 0 },
+  pages: { count: 0 },
+  files: { count: 0 },
+  resume: { count: 0 }
+};
+
+try {
+  const response = await fetch(new URL('/api/admin/stats', Astro.url), {
+    headers: {
+      Cookie: Astro.request.headers.get('cookie') || ''
+    }
+  });
+  
+  if (response.ok) {
+    stats = await response.json();
+  }
+} catch (error) {
+  console.error('Failed to fetch stats:', error);
+}
+
+// Get current date for welcome message
+const currentDate = new Date().toLocaleDateString('en-US', { 
+  weekday: 'long', 
+  year: 'numeric', 
+  month: 'long', 
+  day: 'numeric' 
+});
+---
+
+<AdminLayout title="Dashboard - Admin Panel">
+  <div class="admin-content">
+    <h1 class="page-title">Dashboard</h1>
+    
+    <!-- Welcome Message -->
+    <div class="card welcome-card">
+      <h2>Welcome back!</h2>
+      <p>Today is {currentDate}</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Active Projects</h3>
+        <div class="number">{stats.projects.count}</div>
+      </div>
+      <div class="stat-card">
+        <h3>Pages</h3>
+        <div class="number">{stats.pages.count}</div>
+      </div>
+      <div class="stat-card">
+        <h3>Resume Entries</h3>
+        <div class="number">{stats.resume.count}</div>
+      </div>
+      <div class="stat-card">
+        <h3>Uploaded Files</h3>
+        <div class="number">{stats.files.count}</div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card">
+      <h3>Quick Actions</h3>
+      <ul class="quick-actions">
+        <li><a href="/admin/pages/home">Edit Homepage Content</a></li>
+        <li><a href="/admin/projects/new">Add New Project</a></li>
+        <li><a href="/admin/resume/new">Add Resume Entry</a></li>
+        <li><a href="/admin/files">Upload Files</a></li>
+      </ul>
+    </div>
+
+    <!-- Recent Activity (placeholder for future enhancement) -->
+    <div class="card">
+      <h3>Recent Activity</h3>
+      <p class="text-muted">Activity tracking will be available in a future update.</p>
+    </div>
+  </div>
+
+  <style>
+    /* Additional dashboard-specific styles */
+    .welcome-card {
+      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .welcome-card h2 {
+      color: white;
+      margin-bottom: 10px;
+      font-weight: 300;
+      font-size: 32px;
+    }
+
+    .welcome-card p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+    }
+
+    .text-muted {
+      color: #7f8c8d;
+      font-style: italic;
+    }
+
+    .admin-content {
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Enhanced stat cards */
+    .stat-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Quick actions styling */
+    .quick-actions a {
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .quick-actions a:hover {
+      transform: translateX(5px);
+    }
+
+    .quick-actions a::before {
+      content: '→';
+      margin-right: 8px;
+      opacity: 0;
+      transition: opacity 0.2s ease, margin-right 0.2s ease;
+    }
+
+    .quick-actions a:hover::before {
+      opacity: 1;
+      margin-right: 12px;
+    }
+  </style>
+</AdminLayout>

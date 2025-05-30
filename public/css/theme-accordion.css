@@ -1,0 +1,355 @@
+/* Theme Accordion Styles */
+
+/* Theme toggle button styling */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-icon {
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.theme-text {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Hide theme text on mobile */
+@media (max-width: 768px) {
+    .theme-text {
+        display: none;
+    }
+}
+
+/* Accordion container */
+.theme-accordion {
+    width: 100%;
+}
+
+/* Accordion items */
+.accordion-item {
+    border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.accordion-item:last-child {
+    border-bottom: none;
+}
+
+/* Accordion headers */
+.accordion-header {
+    padding: 12px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-primary, #333333);
+    background-color: var(--bg-secondary, #f8f8f8);
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.accordion-header:hover {
+    background-color: var(--bg-accent, #f0f0f0);
+    color: var(--link-color, #0066cc);
+}
+
+/* Accordion content */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: var(--bg-primary, #ffffff);
+}
+
+/* Show content only when clicked (no hover behavior) */
+.accordion-item.active .accordion-content {
+    max-height: 500px;
+    transition: max-height 0.5s ease-in;
+}
+
+/* Active header styling */
+.accordion-item.active .accordion-header {
+    background-color: var(--link-color, #0066cc);
+    color: var(--bg-primary, #ffffff);
+}
+
+/* Theme options in accordion */
+.accordion-content .theme-option {
+    display: block;
+    padding: 10px 24px;
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+    position: relative;
+    font-weight: 500;
+}
+
+/* Default theme previews - show actual theme colors */
+.theme-option[data-theme="light"] {
+    background-color: #ffffff;
+    color: #05386B;
+    border-left-color: #05386B;
+}
+
+.theme-option[data-theme="dark"] {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border-left-color: #4a9eff;
+}
+
+.theme-option[data-theme="gradient"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    border-left-color: #ffffff;
+}
+
+.theme-option[data-theme="neon"] {
+    background-color: #0a0a0a;
+    color: #00ff88;
+    border-left-color: #ff0088;
+    text-shadow: 0 0 5px currentColor;
+}
+
+.theme-option[data-theme="glass"] {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(187, 222, 251, 0.7) 100%);
+    color: #05386B;
+    border-left-color: #05386B;
+    backdrop-filter: blur(5px);
+}
+
+/* AFL Team colors */
+.theme-option[data-theme="afl-adelaide"] {
+    background-color: #002f5f;
+    color: #ffd700;
+    border-left-color: #e21e31;
+}
+
+.theme-option[data-theme="afl-brisbane"] {
+    background-color: #a30046;
+    color: #f37021;
+    border-left-color: #0033a0;
+}
+
+.theme-option[data-theme="afl-carlton"] {
+    background-color: #002f5f;
+    color: #ffffff;
+    border-left-color: #ffffff;
+}
+
+.theme-option[data-theme="afl-collingwood"] {
+    background-color: #000000;
+    color: #ffffff;
+    border-left-color: #ffffff;
+}
+
+.theme-option[data-theme="afl-essendon"] {
+    background-color: #cc0000;
+    color: #000000;
+    border-left-color: #000000;
+}
+
+.theme-option[data-theme="afl-fremantle"] {
+    background-color: #2a0e4f;
+    color: #ffffff;
+    border-left-color: #ffffff;
+}
+
+.theme-option[data-theme="afl-geelong"] {
+    background-color: #001f3f;
+    color: #ffffff;
+    border-left-color: #ffffff;
+}
+
+.theme-option[data-theme="afl-goldcoast"] {
+    background-color: #f4002e;
+    color: #fed102;
+    border-left-color: #fed102;
+}
+
+.theme-option[data-theme="afl-gws"] {
+    background-color: #f15a22;
+    color: #4a4a4a;
+    border-left-color: #4a4a4a;
+}
+
+.theme-option[data-theme="afl-hawthorn"] {
+    background-color: #4d2004;
+    color: #fbbf15;
+    border-left-color: #fbbf15;
+}
+
+.theme-option[data-theme="afl-melbourne"] {
+    background-color: #003c71;
+    color: #cc0000;
+    border-left-color: #cc0000;
+}
+
+.theme-option[data-theme="afl-northmelbourne"] {
+    background-color: #003c71;
+    color: #ffffff;
+    border-left-color: #ffffff;
+}
+
+.theme-option[data-theme="afl-portadelaide"] {
+    background-color: #008aab;
+    color: #000000;
+    border-left-color: #000000;
+}
+
+.theme-option[data-theme="afl-richmond"] {
+    background-color: #000000;
+    color: #ffd200;
+    border-left-color: #ffd200;
+}
+
+.theme-option[data-theme="afl-stkilda"] {
+    background-color: #ed0f05;
+    color: #ffffff;
+    border-left-color: #000000;
+}
+
+.theme-option[data-theme="afl-sydney"] {
+    background-color: #ed171f;
+    color: #ffffff;
+    border-left-color: #ffffff;
+}
+
+.theme-option[data-theme="afl-westcoast"] {
+    background-color: #002b5c;
+    color: #f2a900;
+    border-left-color: #f2a900;
+}
+
+.theme-option[data-theme="afl-bulldogs"] {
+    background-color: #014896;
+    color: #dc2830;
+    border-left-color: #ffffff;
+}
+
+/* Company Theme colors */
+.theme-option[data-theme="company-anthropic"] {
+    background-color: #d4915d;
+    color: #1a1a1a;
+    border-left-color: #1a1a1a;
+}
+
+.theme-option[data-theme="company-apple"] {
+    background-color: #000000;
+    color: #ffffff;
+    border-left-color: #a6a6a6;
+}
+
+.theme-option[data-theme="company-facebook"] {
+    background-color: #1877f2;
+    color: #ffffff;
+    border-left-color: #ffffff;
+}
+
+.theme-option[data-theme="company-google"] {
+    background: linear-gradient(90deg, #4285f4 25%, #ea4335 25%, #ea4335 50%, #fbbc05 50%, #fbbc05 75%, #34a853 75%);
+    color: #ffffff;
+    border-left-color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.theme-option[data-theme="company-microsoft"] {
+    background-color: #00bcf2;
+    color: #ffffff;
+    border-left-color: #ffffff;
+}
+
+.theme-option[data-theme="company-openai"] {
+    background-color: #74aa9c;
+    color: #1a1a1a;
+    border-left-color: #1a1a1a;
+}
+
+/* Hover effects - invert colors */
+.theme-option:hover {
+    filter: invert(1);
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Active state - also inverted */
+.theme-option.active {
+    filter: invert(1);
+    font-weight: bold;
+    transform: translateX(3px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Special styling for AFL teams section (first section) */
+.accordion-item:first-child .accordion-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+}
+
+.accordion-item:first-child .theme-option {
+    margin: 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--border-color, #eee);
+    border-right: 1px solid var(--border-color, #eee);
+}
+
+.accordion-item:first-child .theme-option:nth-child(even) {
+    border-right: none;
+}
+
+/* Special styling for companies section (third section) */
+.accordion-item:nth-child(3) .accordion-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+}
+
+.accordion-item:nth-child(3) .theme-option {
+    margin: 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--border-color, #eee);
+    border-right: 1px solid var(--border-color, #eee);
+}
+
+.accordion-item:nth-child(3) .theme-option:nth-child(even) {
+    border-right: none;
+}
+
+/* Mobile adjustments for grid sections */
+@media (max-width: 480px) {
+    .accordion-item:first-child .accordion-content,
+    .accordion-item:nth-child(3) .accordion-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .accordion-item:first-child .theme-option,
+    .accordion-item:nth-child(3) .theme-option {
+        border-right: none;
+    }
+}
+
+/* Smooth scrolling for long lists */
+.accordion-content {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color, #ccc) transparent;
+}
+
+.accordion-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.accordion-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.accordion-content::-webkit-scrollbar-thumb {
+    background-color: var(--border-color, #ccc);
+    border-radius: 3px;
+}

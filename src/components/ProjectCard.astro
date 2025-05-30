@@ -1,0 +1,29 @@
+---
+export interface Props {
+  project: {
+    id: number;
+    name: string;
+    description: string;
+    technologies: string;
+    github_link?: string;
+    demo_link?: string;
+    emoji?: string;
+    image_url?: string;
+    subtitle?: string;
+  };
+}
+
+const { project } = Astro.props;
+---
+
+<div class="project-card" data-project-id={project.id}>
+    <div class="project-card-hover-overlay">
+        <span class="view-project-text">View Project</span>
+    </div>
+    <div class="project-card-inner">
+        {project.emoji && <span class="project-card-emoji">{project.emoji}</span>}
+        <h3 class="project-card-title">{project.name}</h3>
+        {project.subtitle && <p class="project-card-subtitle">{project.subtitle}</p>}
+    </div>
+</div>
+

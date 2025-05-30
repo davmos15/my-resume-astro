@@ -1,0 +1,33 @@
+---
+export interface Props {
+  item: {
+    id: number;
+    type: string;
+    title: string;
+    subtitle?: string;
+    description: string;
+    date_range?: string;
+    technologies?: string;
+    company?: string;
+    degree?: string;
+    institution?: string;
+    certifications?: string;
+    skills?: string;
+  };
+}
+
+const { item } = Astro.props;
+---
+
+<div class="dashboard-card resume-card" data-item-id={item.id} data-item-type={item.type}>
+    <h3>{item.title}</h3>
+    {item.subtitle && <h4>{item.subtitle}</h4>}
+    {item.company && <p class="company">{item.company}</p>}
+    {item.institution && <p class="institution">{item.institution}</p>}
+    {item.date_range && <p class="date-range">{item.date_range}</p>}
+    <p class="description">{item.description}</p>
+    {item.technologies && <p class="technologies"><strong>Technologies:</strong> {item.technologies}</p>}
+    {item.degree && <p class="degree"><strong>Degree:</strong> {item.degree}</p>}
+    {item.certifications && <p class="certifications"><strong>Certifications:</strong> {item.certifications}</p>}
+    {item.skills && <p class="skills"><strong>Skills:</strong> {item.skills}</p>}
+</div>

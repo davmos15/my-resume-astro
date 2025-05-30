@@ -1,0 +1,694 @@
+/* Theme Variables and Transitions */
+:root {
+    /* Default Light Theme */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-accent: #e9ecef;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-accent: #999999;
+    --link-color: #007bff;
+    --link-hover: #0056b3;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --nav-bg: #ffffff;
+    --nav-text: #333333;
+    --nav-shadow: rgba(0, 0, 0, 0.1);
+    
+    /* Transition settings */
+    --theme-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-accent: #3a3a3a;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-accent: #808080;
+    --link-color: #4dabf7;
+    --link-hover: #339af0;
+    --border-color: #404040;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --nav-bg: #242424;
+    --nav-text: #e0e0e0;
+    --nav-shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* AFL Team Themes */
+[data-theme="afl-adelaide"] {
+    --bg-primary: #002f5f;
+    --bg-secondary: #e21e31;
+    --bg-accent: #ffd700;
+    --text-primary: #ffffff;
+    --text-secondary: #ffd700;
+    --text-accent: #e21e31;
+    --link-color: #ffd700;
+    --link-hover: #ffed4e;
+    --border-color: #e21e31;
+    --nav-bg: #002f5f;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-brisbane"] {
+    --bg-primary: #a30046;
+    --bg-secondary: #0033a0;
+    --bg-accent: #f37021;
+    --text-primary: #ffffff;
+    --text-secondary: #f37021;
+    --text-accent: #ffd700;
+    --link-color: #f37021;
+    --link-hover: #ff8c42;
+    --border-color: #0033a0;
+    --nav-bg: #a30046;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-carlton"] {
+    --bg-primary: #002f5f;
+    --bg-secondary: #ffffff;
+    --bg-accent: #002f5f;
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --text-accent: #c0c0c0;
+    --link-color: #ffffff;
+    --link-hover: #e0e0e0;
+    --border-color: #ffffff;
+    --nav-bg: #002f5f;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-collingwood"] {
+    --bg-primary: #000000;
+    --bg-secondary: #ffffff;
+    --bg-accent: #000000;
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --text-accent: #cccccc;
+    --link-color: #ffffff;
+    --link-hover: #cccccc;
+    --border-color: #ffffff;
+    --nav-bg: #000000;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-essendon"] {
+    --bg-primary: #cc0000;
+    --bg-secondary: #000000;
+    --bg-accent: #cc0000;
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --text-accent: #ffcc00;
+    --link-color: #ffcc00;
+    --link-hover: #ffd700;
+    --border-color: #000000;
+    --nav-bg: #cc0000;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-fremantle"] {
+    --bg-primary: #2a0e4f;
+    --bg-secondary: #ffffff;
+    --bg-accent: #c7c7c7;
+    --text-primary: #ffffff;
+    --text-secondary: #c7c7c7;
+    --text-accent: #8b79b1;
+    --link-color: #c7c7c7;
+    --link-hover: #ffffff;
+    --border-color: #8b79b1;
+    --nav-bg: #2a0e4f;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-geelong"] {
+    --bg-primary: #001f3f;
+    --bg-secondary: #ffffff;
+    --bg-accent: #001f3f;
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --text-accent: #c0c0c0;
+    --link-color: #ffffff;
+    --link-hover: #e0e0e0;
+    --border-color: #ffffff;
+    --nav-bg: #001f3f;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-goldcoast"] {
+    --bg-primary: #f4002e;
+    --bg-secondary: #fed102;
+    --bg-accent: #0082ca;
+    --text-primary: #ffffff;
+    --text-secondary: #fed102;
+    --text-accent: #0082ca;
+    --link-color: #fed102;
+    --link-hover: #ffdd33;
+    --border-color: #0082ca;
+    --nav-bg: #f4002e;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-gws"] {
+    --bg-primary: #f15a22;
+    --bg-secondary: #4a4a4a;
+    --bg-accent: #ffffff;
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --text-accent: #f15a22;
+    --link-color: #ffffff;
+    --link-hover: #f15a22;
+    --border-color: #4a4a4a;
+    --nav-bg: #f15a22;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-hawthorn"] {
+    --bg-primary: #4d2004;
+    --bg-secondary: #fbbf15;
+    --bg-accent: #4d2004;
+    --text-primary: #fbbf15;
+    --text-secondary: #ffffff;
+    --text-accent: #fbbf15;
+    --link-color: #fbbf15;
+    --link-hover: #ffd700;
+    --border-color: #fbbf15;
+    --nav-bg: #4d2004;
+    --nav-text: #fbbf15;
+}
+
+[data-theme="afl-melbourne"] {
+    --bg-primary: #003c71;
+    --bg-secondary: #cc0000;
+    --bg-accent: #003c71;
+    --text-primary: #ffffff;
+    --text-secondary: #cc0000;
+    --text-accent: #ffffff;
+    --link-color: #cc0000;
+    --link-hover: #ff0000;
+    --border-color: #cc0000;
+    --nav-bg: #003c71;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-northmelbourne"] {
+    --bg-primary: #003c71;
+    --bg-secondary: #ffffff;
+    --bg-accent: #003c71;
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --text-accent: #c0c0c0;
+    --link-color: #ffffff;
+    --link-hover: #e0e0e0;
+    --border-color: #ffffff;
+    --nav-bg: #003c71;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-portadelaide"] {
+    --bg-primary: #008aab;
+    --bg-secondary: #000000;
+    --bg-accent: #ffffff;
+    --text-primary: #ffffff;
+    --text-secondary: #008aab;
+    --text-accent: #c0c0c0;
+    --link-color: #008aab;
+    --link-hover: #00a8d6;
+    --border-color: #000000;
+    --nav-bg: #008aab;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-richmond"] {
+    --bg-primary: #000000;
+    --bg-secondary: #ffd200;
+    --bg-accent: #000000;
+    --text-primary: #ffd200;
+    --text-secondary: #ffffff;
+    --text-accent: #ffd200;
+    --link-color: #ffd200;
+    --link-hover: #ffdd33;
+    --border-color: #ffd200;
+    --nav-bg: #000000;
+    --nav-text: #ffd200;
+}
+
+[data-theme="afl-stkilda"] {
+    --bg-primary: #000000;
+    --bg-secondary: #ed0f05;
+    --bg-accent: #ffffff;
+    --text-primary: #ffffff;
+    --text-secondary: #ed0f05;
+    --text-accent: #ffffff;
+    --link-color: #ed0f05;
+    --link-hover: #ff3333;
+    --border-color: #ed0f05;
+    --nav-bg: #000000;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-sydney"] {
+    --bg-primary: #ed171f;
+    --bg-secondary: #ffffff;
+    --bg-accent: #ed171f;
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --text-accent: #ffcccc;
+    --link-color: #ffffff;
+    --link-hover: #ffcccc;
+    --border-color: #ffffff;
+    --nav-bg: #ed171f;
+    --nav-text: #ffffff;
+}
+
+[data-theme="afl-westcoast"] {
+    --bg-primary: #002b5c;
+    --bg-secondary: #f2a900;
+    --bg-accent: #002b5c;
+    --text-primary: #f2a900;
+    --text-secondary: #ffffff;
+    --text-accent: #f2a900;
+    --link-color: #f2a900;
+    --link-hover: #ffd700;
+    --border-color: #f2a900;
+    --nav-bg: #002b5c;
+    --nav-text: #f2a900;
+}
+
+[data-theme="afl-bulldogs"] {
+    --bg-primary: #014896;
+    --bg-secondary: #dc2830;
+    --bg-accent: #ffffff;
+    --text-primary: #ffffff;
+    --text-secondary: #dc2830;
+    --text-accent: #ffffff;
+    --link-color: #dc2830;
+    --link-hover: #ff3333;
+    --border-color: #dc2830;
+    --nav-bg: #014896;
+    --nav-text: #ffffff;
+}
+
+/* Apply theme transitions to all elements */
+* {
+    transition: var(--theme-transition);
+}
+
+/* Override specific elements that need different transitions */
+a, button {
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Theme-aware elements */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.topnav {
+    background-color: var(--nav-bg);
+    box-shadow: 0 2px 10px var(--nav-shadow);
+}
+
+.topnav a {
+    color: var(--nav-text);
+}
+
+.intro, .about, .work, .projects, .contact {
+    color: var(--text-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+}
+
+a {
+    color: var(--link-color);
+}
+
+a:hover {
+    color: var(--link-hover);
+}
+
+/* Page transition classes */
+.page-transition-active {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.page-transition-enter {
+    animation: pageEnter 0.5s ease forwards;
+}
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Floating nav styles */
+.topnav.floating {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    background-color: color-mix(in srgb, var(--nav-bg) 90%, transparent);
+    box-shadow: 0 4px 20px var(--nav-shadow);
+    padding: 10px 0;
+    transition: all 0.3s ease;
+}
+
+.topnav.floating #navbar {
+    padding: 0;
+}
+
+.topnav.floating #logo {
+    height: 40px;
+    transition: height 0.3s ease;
+}
+
+/* Theme menu styles */
+.theme-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.theme-toggle {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--nav-text);
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-toggle:hover {
+    background-color: var(--bg-accent);
+}
+
+.theme-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    min-width: 250px;
+    display: none;
+    z-index: 1001;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.theme-dropdown.show {
+    display: block;
+}
+
+.theme-section {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.theme-section:last-child {
+    border-bottom: none;
+}
+
+.theme-section h4 {
+    margin: 0 0 8px 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.theme-option {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.theme-option:hover {
+    background-color: var(--bg-accent);
+}
+
+.theme-option.active {
+    background-color: var(--link-color);
+    color: white;
+}
+
+.theme-preview {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 12px;
+    border: 2px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-preview.split {
+    background: linear-gradient(135deg, var(--preview-primary) 50%, var(--preview-secondary) 50%);
+}
+
+/* WOW Factor Themes */
+
+/* Gradient Wave Theme */
+[data-theme="gradient"] {
+    --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --bg-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --bg-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --text-primary: #ffffff;
+    --text-secondary: #f0f0f0;
+    --text-accent: #e0e0e0;
+    --link-color: #ffd700;
+    --link-hover: #ffed4e;
+    --border-color: rgba(255, 255, 255, 0.3);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --nav-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --nav-text: #ffffff;
+    --nav-shadow: rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="gradient"] body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+}
+
+[data-theme="gradient"] .topnav {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+[data-theme="gradient"] main {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+}
+
+/* Neon Glow Theme */
+[data-theme="neon"] {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-accent: #2a2a2a;
+    --text-primary: #00ffff;
+    --text-secondary: #ff00ff;
+    --text-accent: #ffff00;
+    --link-color: #00ff00;
+    --link-hover: #00ffaa;
+    --border-color: #00ffff;
+    --shadow-color: rgba(0, 255, 255, 0.5);
+    --nav-bg: #0a0a0a;
+    --nav-text: #00ffff;
+    --nav-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+[data-theme="neon"] * {
+    text-shadow: 0 0 5px currentColor;
+}
+
+[data-theme="neon"] a {
+    text-shadow: 0 0 10px currentColor;
+    transition: all 0.3s ease;
+}
+
+[data-theme="neon"] a:hover {
+    text-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
+}
+
+[data-theme="neon"] .topnav {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), inset 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+[data-theme="neon"] button,
+[data-theme="neon"] input,
+[data-theme="neon"] textarea {
+    border: 1px solid var(--link-color);
+    box-shadow: 0 0 5px var(--link-color), inset 0 0 5px var(--link-color);
+}
+
+/* Glassmorphism Theme */
+[data-theme="glass"] {
+    --bg-primary: #e3f2fd;
+    --bg-secondary: rgba(255, 255, 255, 0.7);
+    --bg-accent: rgba(255, 255, 255, 0.5);
+    --text-primary: #1a237e;
+    --text-secondary: #3949ab;
+    --text-accent: #5c6bc0;
+    --link-color: #1565c0;
+    --link-hover: #0d47a1;
+    --border-color: rgba(255, 255, 255, 0.3);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --nav-bg: rgba(255, 255, 255, 0.8);
+    --nav-text: #1a237e;
+    --nav-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+[data-theme="glass"] body {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
+    background-attachment: fixed;
+}
+
+[data-theme="glass"] body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><circle cx="200" cy="200" r="150" fill="rgba(100,149,237,0.1)"/><circle cx="800" cy="600" r="200" fill="rgba(138,43,226,0.1)"/><circle cx="1000" cy="300" r="100" fill="rgba(30,144,255,0.1)"/></svg>');
+    z-index: -1;
+}
+
+[data-theme="glass"] .topnav,
+[data-theme="glass"] main,
+[data-theme="glass"] .card,
+[data-theme="glass"] .dropdown-content {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+[data-theme="glass"] button,
+[data-theme="glass"] input,
+[data-theme="glass"] textarea {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Company Themes */
+
+/* Anthropic Theme */
+[data-theme="company-anthropic"] {
+    --bg-primary: #faf9f6;
+    --bg-secondary: #d4915d;
+    --bg-accent: #b8734a;
+    --text-primary: #1a1a1a;
+    --text-secondary: #2d2d2d;
+    --text-accent: #404040;
+    --link-color: #d4915d;
+    --link-hover: #b8734a;
+    --border-color: #d4915d;
+    --nav-bg: #d4915d;
+    --nav-text: #1a1a1a;
+    --nav-shadow: rgba(212, 145, 93, 0.3);
+}
+
+/* Apple Theme */
+[data-theme="company-apple"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f7;
+    --bg-accent: #e8e8ed;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-accent: #86868b;
+    --link-color: #007aff;
+    --link-hover: #0051d5;
+    --border-color: #d2d2d7;
+    --nav-bg: #000000;
+    --nav-text: #ffffff;
+    --nav-shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Facebook Theme */
+[data-theme="company-facebook"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f0f2f5;
+    --bg-accent: #e4e6ea;
+    --text-primary: #1c1e21;
+    --text-secondary: #65676b;
+    --text-accent: #8a8d91;
+    --link-color: #1877f2;
+    --link-hover: #166fe5;
+    --border-color: #dadde1;
+    --nav-bg: #1877f2;
+    --nav-text: #ffffff;
+    --nav-shadow: rgba(24, 119, 242, 0.3);
+}
+
+/* Google Theme */
+[data-theme="company-google"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-accent: #e8eaed;
+    --text-primary: #202124;
+    --text-secondary: #5f6368;
+    --text-accent: #9aa0a6;
+    --link-color: #1a73e8;
+    --link-hover: #1557b0;
+    --border-color: #dadce0;
+    --nav-bg: #4285f4;
+    --nav-text: #ffffff;
+    --nav-shadow: rgba(66, 133, 244, 0.3);
+}
+
+/* Microsoft Theme */
+[data-theme="company-microsoft"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f3f2f1;
+    --bg-accent: #edebe9;
+    --text-primary: #323130;
+    --text-secondary: #605e5c;
+    --text-accent: #8a8886;
+    --link-color: #0078d4;
+    --link-hover: #106ebe;
+    --border-color: #edebe9;
+    --nav-bg: #00bcf2;
+    --nav-text: #ffffff;
+    --nav-shadow: rgba(0, 188, 242, 0.3);
+}
+
+/* OpenAI Theme */
+[data-theme="company-openai"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f7f7f8;
+    --bg-accent: #ececf1;
+    --text-primary: #2d333a;
+    --text-secondary: #6e7781;
+    --text-accent: #8b949e;
+    --link-color: #74aa9c;
+    --link-hover: #5d8a7a;
+    --border-color: #d1d9e0;
+    --nav-bg: #74aa9c;
+    --nav-text: #ffffff;
+    --nav-shadow: rgba(116, 170, 156, 0.3);
+}

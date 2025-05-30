@@ -1,0 +1,300 @@
+/* Contact Page Theme-Compatible Styles */
+
+/* Remove inline styles from contact.ejs and use this file instead */
+
+/* Contact Page Layout */
+#contact-section {
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#contact-section h1 {
+    color: var(--text-primary);
+    margin-bottom: 40px;
+}
+
+/* Contact Cards */
+.contact-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background-color: var(--card-bg, var(--bg-secondary));
+    border: 2px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.contact-logo {
+    width: 50px;
+    height: 50px;
+    transition: all 0.3s ease;
+}
+
+/* Email Card */
+.email-card {
+    background-color: #EA4335;
+}
+
+.email-card .contact-logo {
+    color: white;
+}
+
+.email-card:hover {
+    background-color: #d33b2c;
+}
+
+/* LinkedIn Card */
+.linkedin-card {
+    background-color: #0077B5;
+}
+
+.linkedin-card .contact-logo {
+    color: white;
+}
+
+.linkedin-card:hover {
+    background-color: #006097;
+}
+
+/* GitHub Card */
+.github-card {
+    background-color: #24292e;
+}
+
+.github-card .contact-logo {
+    color: white;
+}
+
+.github-card:hover {
+    background-color: #1a1e22;
+}
+
+/* Theme overrides for contact cards */
+[data-theme] .contact-card {
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .contact-card,
+[data-theme="neon"] .contact-card {
+    border-width: 2px;
+}
+
+/* Contact Form */
+.contact-form-container {
+    margin-top: 50px;
+}
+
+.contact-form-container h2 {
+    color: var(--text-primary);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#contact-section .form-style {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    background: var(--form-bg, var(--bg-secondary));
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+}
+
+#contact-section .form-style input[type="text"],
+#contact-section .form-style input[type="email"],
+#contact-section .form-style textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--input-border, var(--border-color));
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: var(--input-bg, var(--bg-primary));
+    color: var(--text-primary);
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+}
+
+#contact-section .form-style input[type="text"]:focus,
+#contact-section .form-style input[type="email"]:focus,
+#contact-section .form-style textarea:focus {
+    outline: none;
+    border-color: var(--input-focus-border, var(--link-color));
+}
+
+#contact-section .form-style textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+#contact-section .form-style input[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background: var(--button-bg, var(--link-color));
+    color: var(--button-text, var(--bg-primary));
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#contact-section .form-style input[type="submit"]:hover {
+    background: var(--button-hover-bg, var(--link-hover));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: block;
+}
+
+.modal-content {
+    background-color: var(--modal-bg, var(--bg-primary));
+    margin: 15% auto;
+    padding: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    animation: slideIn 0.3s ease;
+}
+
+.close {
+    color: var(--text-secondary, #aaa);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--text-primary);
+}
+
+.modal-body {
+    padding: 30px;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 60px;
+    color: var(--success-color, #4CAF50);
+    margin-bottom: 20px;
+}
+
+.modal-body h3 {
+    color: var(--text-primary);
+    margin-bottom: 15px;
+}
+
+.modal-body p {
+    color: var(--text-secondary, var(--text-primary));
+    line-height: 1.6;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .contact-cards {
+        gap: 20px;
+    }
+    
+    .contact-card {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .contact-logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    #contact-section .form-style {
+        padding: 20px;
+    }
+    
+    #contact-section {
+        padding: 40px 15px;
+    }
+}
+
+/* Dark theme specific adjustments */
+[data-theme="dark"] #contact-section .form-style,
+[data-theme="neon"] #contact-section .form-style {
+    background: var(--bg-accent);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* AFL theme adjustments for better contrast */
+[data-theme*="afl-"] .contact-button {
+    border: 2px solid var(--border-color);
+}
+
+[data-theme*="afl-"] #contact-section .form-style {
+    border: 2px solid var(--border-color);
+}
+
+/* High contrast themes */
+[data-theme="high-contrast"] .contact-button,
+[data-theme="high-contrast"] #contact-section .form-style input[type="submit"] {
+    border: 2px solid currentColor;
+}
+
+[data-theme="high-contrast"] #contact-section .form-style input[type="text"],
+[data-theme="high-contrast"] #contact-section .form-style input[type="email"],
+[data-theme="high-contrast"] #contact-section .form-style textarea {
+    border-width: 2px;
+}

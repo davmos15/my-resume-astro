@@ -1,0 +1,214 @@
+/* Modern Navigation CSS */
+
+/* Prevent horizontal scroll only */
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* Base Navigation Styles */
+.topnav {
+    background-color: var(--nav-bg, #ffffff);
+    border-bottom: 1px solid var(--border-color, #e0e0e0);
+    position: relative;
+    width: 100%;
+    z-index: 1000;
+    font-family: 'Open Sans', sans-serif;
+    box-shadow: 0 2px 4px var(--shadow-color, rgba(0,0,0,0.1));
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 60px;
+}
+
+/* Logo Styles */
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-link:hover {
+    background: transparent !important;
+}
+
+#logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+/* AFL logo styling */
+#logo.afl-logo {
+    width: 45px;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 4px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    object-fit: contain;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+    margin: 0 5px;
+}
+
+.nav-link {
+    display: block;
+    padding: 15px 18px;
+    color: var(--nav-text, #333333);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.nav-link:hover {
+    background-color: var(--bg-accent, rgba(0,0,0,0.05));
+    color: var(--link-hover, #0066cc);
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--bg-secondary, #ffffff);
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px var(--shadow-color, rgba(0,0,0,0.15));
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+/* Show dropdown on hover */
+.nav-item.dropdown:hover .dropdown-menu,
+.dropdown:hover .dropdown-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-link {
+    display: block;
+    padding: 10px 16px;
+    color: var(--text-primary, #333333);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.dropdown-link:hover {
+    background-color: var(--bg-accent, #f5f5f5);
+    color: var(--link-hover, #0066cc);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0 10px;
+        height: 55px;
+        flex-wrap: nowrap;
+    }
+    
+    #logo {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .nav-menu {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    .nav-menu::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .nav-item {
+        flex-shrink: 0;
+        margin: 0 2px;
+    }
+    
+    .nav-link {
+        padding: 10px 12px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+    
+    /* Hide resume dropdown menu on mobile */
+    .nav-item.dropdown .dropdown-menu {
+        display: none !important;
+    }
+    
+    /* Remove dropdown indicator for resume on mobile */
+    .nav-item.dropdown .dropdown-toggle::after {
+        display: none;
+    }
+    
+    /* Theme dropdown shows on click for mobile */
+    .nav-item .theme-dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        z-index: 1000;
+        min-width: 250px;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+    
+    .nav-item .theme-dropdown-menu.show {
+        display: block;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0 8px;
+        height: 50px;
+    }
+    
+    .nav-link {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+    
+}

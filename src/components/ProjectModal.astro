@@ -1,0 +1,153 @@
+---
+// This component provides the modal structure
+// The actual content will be populated via JavaScript
+---
+
+<div id="projectModal" class="project-modal">
+    <div class="project-modal-content">
+        <button class="modal-close" aria-label="Close modal">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <div id="modalProjectContent">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+    </div>
+</div>
+
+<script>
+  function initProjectModal() {
+    const modal = document.getElementById('projectModal');
+    const modalContent = document.getElementById('modalProjectContent');
+    const closeBtn = modal?.querySelector('.modal-close');
+    
+    // Function to open modal with project data
+    window.openProjectModal = (project) => {
+      if (!modal || !modalContent) return;
+      
+      // Build modal content following the projects-dashboard.css structure
+      modalContent.innerHTML = `
+        <div class="modal-header">
+          <div class="modal-header-content">
+            ${project.emoji ? `<div class="modal-emoji">${project.emoji}</div>` : ''}
+            <div>
+              <h1 class="modal-title">${project.name}</h1>
+              ${project.subtitle ? `<p class="modal-subtitle">${project.subtitle}</p>` : ''}
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="modal-section">
+            <h2 class="section-title">📋 Overview</h2>
+            <div class="section-content">
+              <p>${project.description}</p>
+            </div>
+          </div>
+          
+          ${project.achievements && project.achievements.length > 0 ? `
+            <div class="modal-section">
+              <h2 class="section-title">🎯 Key Achievements</h2>
+              <ul class="achievements-list">
+                ${project.achievements.map((achievement, index) => `
+                  <li class="achievement-item">
+                    <span class="achievement-icon">✓</span>
+                    <span>${achievement}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+          ` : ''}
+          
+          <div class="modal-section">
+            <h2 class="section-title">💻 Technologies</h2>
+            <div class="tech-tags-container">
+              ${project.technologies.split(',').map(tech => `
+                <span class="tech-tag">${tech.trim()}</span>
+              `).join('')}
+            </div>
+          </div>
+          
+          ${project.timeline || project.team_size ? `
+            <div class="modal-section">
+              <h2 class="section-title">📊 Project Stats</h2>
+              <div class="stats-section">
+                ${project.timeline ? `
+                  <div class="stat-item">
+                    <span class="stat-icon">📅</span>
+                    <div class="stat-content">
+                      <span class="stat-label">Timeline</span>
+                      <span class="stat-value">${project.timeline}</span>
+                    </div>
+                  </div>
+                ` : ''}
+                ${project.team_size ? `
+                  <div class="stat-item">
+                    <span class="stat-icon">👥</span>
+                    <div class="stat-content">
+                      <span class="stat-label">Team Size</span>
+                      <span class="stat-value">${project.team_size} ${project.team_size === 1 ? 'person' : 'people'}</span>
+                    </div>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          ` : ''}
+          
+          ${project.image_url ? `
+            <div class="modal-section">
+              <img src="${project.image_url}" alt="${project.name}" class="project-image">
+            </div>
+          ` : ''}
+          
+          <div class="modal-section">
+            <div class="links-section">
+              ${project.github_link ? `
+                <a href="${project.github_link}" target="_blank" rel="noopener noreferrer" class="project-link github-link">
+                  <span class="link-icon">🔗</span>
+                  View on GitHub
+                </a>
+              ` : ''}
+              ${project.demo_link ? `
+                <a href="${project.demo_link}" target="_blank" rel="noopener noreferrer" class="project-link live-link">
+                  <span class="link-icon">🚀</span>
+                  View Live Demo
+                </a>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+      
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    };
+    
+    // Close modal
+    const closeModal = () => {
+      if (!modal) return;
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    };
+    
+    closeBtn?.addEventListener('click', closeModal);
+    
+    // Close on clicking outside
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal?.classList.contains('show')) {
+        closeModal();
+      }
+    });
+  }
+  
+  // Initialize on page load and navigation
+  document.addEventListener('DOMContentLoaded', initProjectModal);
+  document.addEventListener('astro:page-load', initProjectModal);
+</script>
