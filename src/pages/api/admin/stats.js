@@ -1,4 +1,4 @@
-import { db } from '../../../lib/db';
+import db from '../../../lib/db.js';
 
 export async function GET(context) {
   // Check authentication
@@ -13,34 +13,29 @@ export async function GET(context) {
   }
 
   try {
-    // Get counts from database
-    const projectsResult = await new Promise((resolve, reject) => {
-      db.get('SELECT COUNT(*) as count FROM projects WHERE is_active = 1', (err, row) => {
-        if (err) reject(err);
-        else resolve(row);
-      });
-    });
-
-    const pagesResult = await new Promise((resolve, reject) => {
-      db.get('SELECT COUNT(DISTINCT page_name) as count FROM page_content', (err, row) => {
-        if (err) reject(err);
-        else resolve(row);
-      });
-    });
-
-    const filesResult = await new Promise((resolve, reject) => {
-      db.get('SELECT COUNT(*) as count FROM files', (err, row) => {
-        if (err) reject(err);
-        else resolve(row);
-      });
-    });
-
-    const resumeResult = await new Promise((resolve, reject) => {
-      db.get('SELECT COUNT(*) as count FROM resume_entries', (err, row) => {
-        if (err) reject(err);
-        else resolve(row);
-      });
-    });
+    // Get counts from database using better-sqlite3 syntax
+    const projectsResult = db.prepare('SELECT COUNT(*) as count FROM projects WHERE is_active = 1').get();
+    const pagesResult = db.prepare('SELECT COUNT(DISTINCT page_name) as count FROM page_content').get();
+    
+    // Handle case where files table might not exist
+    let filesResult;
+    try {
+      filesResult = db.prepare('SELECT COUNT(*) as count FROM files').get();
+    } catch {
+      filesResult = { count: 0 };
+    }
+    
+    // Handle case where resume_entries table might not exist, try resume_sections
+    let resumeResult;
+    try {
+      resumeResult = db.prepare('SELECT COUNT(*) as count FROM resume_sections WHERE is_active = 1').get();
+    } catch {
+      try {
+        resumeResult = db.prepare('SELECT COUNT(*) as count FROM resume_entries').get();
+      } catch {
+        resumeResult = { count: 0 };
+      }
+    }
 
     const stats = {
       projects: { count: projectsResult?.count || 0 },
